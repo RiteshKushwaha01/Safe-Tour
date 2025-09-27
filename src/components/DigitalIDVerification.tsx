@@ -10,8 +10,10 @@ import {
   Clock,
   AlertTriangle,
 } from 'lucide-react'
+import { useTranslation } from '../hooks/useTranslation'
 
 const DigitalIDVerification: React.FC = () => {
+  const { t } = useTranslation()
   const [searchId, setSearchId] = useState('')
   const [verificationResult, setVerificationResult] = useState<any>(null)
   const [isVerifying, setIsVerifying] = useState(false)
@@ -54,7 +56,7 @@ const DigitalIDVerification: React.FC = () => {
       <form onSubmit={handleVerify} className="mb-8">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-            Verify Tourist Digital ID
+            {t('digitalIdVerification.title')}
           </h3>
           <div className="flex gap-4">
             <div className="flex-1">
@@ -62,7 +64,7 @@ const DigitalIDVerification: React.FC = () => {
                 type="text"
                 value={searchId}
                 onChange={(e) => setSearchId(e.target.value)}
-                placeholder="Enter blockchain ID (e.g., 0x1a2b3c4d5e6f for demo)"
+                placeholder={t('digitalIdVerification.placeholder')}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
@@ -74,12 +76,12 @@ const DigitalIDVerification: React.FC = () => {
               {isVerifying ? (
                 <>
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  <span>Verifying...</span>
+                  <span>{t('digitalIdVerification.verifying')}</span>
                 </>
               ) : (
                 <>
                   <Search className="w-5 h-5" />
-                  <span>Verify ID</span>
+                  <span>{t('digitalIdVerification.verifyButton')}</span>
                 </>
               )}
             </button>
@@ -108,10 +110,10 @@ const DigitalIDVerification: React.FC = () => {
                   <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
                   <div>
                     <h3 className="text-xl font-bold text-green-800 dark:text-green-300">
-                      ID Verified Successfully
+                      {t('digitalIdVerification.verified')}
                     </h3>
                     <p className="text-green-600 dark:text-green-400">
-                      Digital ID is valid and active
+                      {t('digitalIdVerification.verifiedDesc')}
                     </p>
                   </div>
                 </>
@@ -120,7 +122,7 @@ const DigitalIDVerification: React.FC = () => {
                   <XCircle className="w-8 h-8 text-red-600 dark:text-red-400" />
                   <div>
                     <h3 className="text-xl font-bold text-red-800 dark:text-red-300">
-                      Verification Failed
+                      {t('digitalIdVerification.failed')}
                     </h3>
                     <p className="text-red-600 dark:text-red-400">
                       {verificationResult.error}
@@ -137,14 +139,14 @@ const DigitalIDVerification: React.FC = () => {
                 {/* Tourist Information */}
                 <div>
                   <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                    Tourist Information
+                    {t('digitalIdVerification.touristInfo')}
                   </h4>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                       <User className="w-5 h-5 text-gray-500" />
                       <div>
                         <span className="text-sm text-gray-500 dark:text-gray-400">
-                          Name:
+                          {t('digitalIdVerification.name')}:
                         </span>
                         <p className="font-medium text-gray-900 dark:text-white">
                           {verificationResult.tourist.name}
@@ -155,7 +157,7 @@ const DigitalIDVerification: React.FC = () => {
                       <Shield className="w-5 h-5 text-gray-500" />
                       <div>
                         <span className="text-sm text-gray-500 dark:text-gray-400">
-                          Digital ID:
+                          {t('digitalIdVerification.digitalId')}:
                         </span>
                         <p className="font-mono text-sm text-gray-900 dark:text-white">
                           {verificationResult.tourist.id}
@@ -168,7 +170,7 @@ const DigitalIDVerification: React.FC = () => {
                       </div>
                       <div>
                         <span className="text-sm text-gray-500 dark:text-gray-400">
-                          Nationality:
+                          {t('digitalIdVerification.nationality')}:
                         </span>
                         <p className="font-medium text-gray-900 dark:text-white">
                           {verificationResult.tourist.nationality}
@@ -181,14 +183,14 @@ const DigitalIDVerification: React.FC = () => {
                 {/* Status Information */}
                 <div>
                   <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                    Current Status
+                    {t('digitalIdVerification.currentStatus')}
                   </h4>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                       <MapPin className="w-5 h-5 text-gray-500" />
                       <div>
                         <span className="text-sm text-gray-500 dark:text-gray-400">
-                          Last Location:
+                          {t('digitalIdVerification.lastLocation')}:
                         </span>
                         <p className="font-medium text-gray-900 dark:text-white">
                           {verificationResult.tourist.location}
@@ -199,7 +201,7 @@ const DigitalIDVerification: React.FC = () => {
                       <Clock className="w-5 h-5 text-gray-500" />
                       <div>
                         <span className="text-sm text-gray-500 dark:text-gray-400">
-                          Last Seen:
+                          {t('digitalIdVerification.lastSeen')}:
                         </span>
                         <p className="font-medium text-gray-900 dark:text-white">
                           {verificationResult.tourist.lastSeen}
@@ -212,7 +214,7 @@ const DigitalIDVerification: React.FC = () => {
                       </div>
                       <div>
                         <span className="text-sm text-gray-500 dark:text-gray-400">
-                          Status:
+                          {t('digitalIdVerification.status')}:
                         </span>
                         <p className="font-medium text-green-600 dark:text-green-400">
                           {verificationResult.tourist.status}
@@ -226,12 +228,12 @@ const DigitalIDVerification: React.FC = () => {
               {/* Emergency Information */}
               <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                  Emergency Information
+                  {t('digitalIdVerification.emergencyInfo')}
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                      Emergency Contact
+                      {t('digitalIdVerification.emergencyContact')}
                     </p>
                     <p className="font-medium text-gray-900 dark:text-white">
                       {verificationResult.tourist.emergencyContact}
@@ -239,7 +241,7 @@ const DigitalIDVerification: React.FC = () => {
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                      Medical Info
+                      {t('digitalIdVerification.medicalInfo')}
                     </p>
                     <p className="font-medium text-gray-900 dark:text-white">
                       {verificationResult.tourist.medical}
@@ -247,7 +249,7 @@ const DigitalIDVerification: React.FC = () => {
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                      Insurance
+                      {t('digitalIdVerification.insurance')}
                     </p>
                     <p className="font-medium text-gray-900 dark:text-white">
                       {verificationResult.tourist.insurance}
@@ -260,15 +262,15 @@ const DigitalIDVerification: React.FC = () => {
               <div className="mt-6 flex flex-wrap gap-3">
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-colors duration-200">
                   <MapPin className="w-4 h-4" />
-                  <span>Track Location</span>
+                  <span>{t('digitalIdVerification.trackLocation')}</span>
                 </button>
                 <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-colors duration-200">
                   <Shield className="w-4 h-4" />
-                  <span>Send Safety Check</span>
+                  <span>{t('digitalIdVerification.sendSafetyCheck')}</span>
                 </button>
                 <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-colors duration-200">
                   <AlertTriangle className="w-4 h-4" />
-                  <span>Create Alert</span>
+                  <span>{t('digitalIdVerification.createAlert')}</span>
                 </button>
               </div>
             </div>
@@ -279,19 +281,19 @@ const DigitalIDVerification: React.FC = () => {
       {/* Demo Instructions */}
       <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-xl mt-8">
         <h4 className="text-lg font-bold text-blue-800 dark:text-blue-300 mb-3">
-          Demo Instructions
+          {t('digitalIdVerification.demoInstructions')}
         </h4>
         <p className="text-blue-700 dark:text-blue-400 mb-2">
-          Try these sample IDs to test the verification system:
+          {t('digitalIdVerification.demoDesc')}
         </p>
         <ul className="text-blue-600 dark:text-blue-400 space-y-1">
           <li>
-            • <code>0x1a2b3c4d5e6f</code> - Valid tourist ID
+            • <code>0x1a2b3c4d5e6f</code> - {t('digitalIdVerification.validId')}
           </li>
           <li>
-            • <code>invalid123</code> - Invalid ID example
+            • <code>invalid123</code> - {t('digitalIdVerification.invalidId')}
           </li>
-          <li>• Any ID containing "valid" - Will show as verified</li>
+          <li>• {t('digitalIdVerification.validKeyword')}</li>
         </ul>
       </div>
     </div>

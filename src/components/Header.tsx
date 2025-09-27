@@ -3,22 +3,25 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Moon, Sun, Menu, X, Shield, Users, Brain, Phone, LogIn, UserPlus } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useAuth } from '../contexts/AuthContext'
+import { useTranslation } from '../hooks/useTranslation'
 import UserProfile from './UserProfile'
+import LanguageSelector from './LanguageSelector'
 
 const Header: React.FC = () => {
   const { isDark, toggleTheme } = useTheme()
   const { user } = useAuth()
+  const { t } = useTranslation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
 
   const navigation = [
-    { name: 'Home', path: '/', icon: Shield },
-    { name: 'Tourist Features', path: '/tourist-features', icon: Users },
-    { name: 'Authority Dashboard', path: '/authority-dashboard', icon: Shield },
-    { name: 'AI & IoT', path: '/ai-iot', icon: Brain },
-    { name: 'About', path: '/about', icon: Shield },
-    { name: 'Contact', path: '/contact', icon: Phone },
+    { name: t('navigation.home'), path: '/', icon: Shield },
+    { name: t('navigation.touristFeatures'), path: '/tourist-features', icon: Users },
+    { name: t('navigation.authorityDashboard'), path: '/authority-dashboard', icon: Shield },
+    { name: t('navigation.aiIot'), path: '/ai-iot', icon: Brain },
+    { name: t('navigation.about'), path: '/about', icon: Shield },
+    { name: t('navigation.contact'), path: '/contact', icon: Phone },
   ]
 
   const isActive = (path: string) => location.pathname === path
@@ -77,6 +80,9 @@ const Header: React.FC = () => {
 
           {/* Right Section */}
           <div className="flex items-center space-x-3">
+            {/* Language Selector */}
+            <LanguageSelector />
+
             {/* Theme Toggle */}
             <button
               onClick={() => {
@@ -102,13 +108,13 @@ const Header: React.FC = () => {
                   to="/login"
                   className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-200"
                 >
-                  Sign In
+                  {t('common.login')}
                 </Link>
                 <Link
                   to="/register"
                   className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                 >
-                  Get Started
+                  {t('common.register')}
                 </Link>
               </div>
             )}
@@ -159,7 +165,7 @@ const Header: React.FC = () => {
                     className="flex items-center justify-center px-4 py-3 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200"
                   >
                     <LogIn className="w-4 h-4 mr-2" />
-                    Sign In
+                    {t('common.login')}
                   </Link>
                   <Link
                     to="/register"
@@ -167,7 +173,7 @@ const Header: React.FC = () => {
                     className="flex items-center justify-center px-4 py-3 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-sm hover:shadow-md transition-all duration-200"
                   >
                     <UserPlus className="w-4 h-4 mr-2" />
-                    Get Started
+                    {t('common.register')}
                   </Link>
                 </div>
               )}
