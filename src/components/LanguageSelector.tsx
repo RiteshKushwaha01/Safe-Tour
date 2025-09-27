@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Globe, ChevronDown } from 'lucide-react';
+import { Globe, ChevronDown, Phone, MapPin } from 'lucide-react';
 
 const LanguageSelector: React.FC = () => {
   const [selectedLang, setSelectedLang] = useState('en');

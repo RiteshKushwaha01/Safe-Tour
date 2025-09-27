@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import {
   Mail,
   Phone,
@@ -12,6 +13,7 @@ import {
 } from 'lucide-react'
 
 const Contact: React.FC = () => {
+  const navigate = useNavigate()
   const [formType, setFormType] = useState<'tourist' | 'authority' | 'general'>(
     'tourist'
   )
@@ -20,7 +22,18 @@ const Contact: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitted(true)
-    setTimeout(() => setIsSubmitted(false), 3000)
+    
+    // Navigate to appropriate page based on form type after a short delay
+    setTimeout(() => {
+      if (formType === 'tourist') {
+        navigate('/login?redirect=/tourist-features')
+      } else if (formType === 'authority') {
+        navigate('/login?redirect=/authority-dashboard')
+      } else if (formType === 'general') {
+        // For general inquiry, show success message and stay on contact page
+        setTimeout(() => setIsSubmitted(false), 3000)
+      }
+    }, 1500) // 1.5 second delay to show success message
   }
 
   return (

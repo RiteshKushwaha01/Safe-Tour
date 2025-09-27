@@ -24,20 +24,28 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const saved = localStorage.getItem('theme')
-    if (
-      saved === 'dark' ||
-      (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    
+    console.log('Initial theme check:', { saved, prefersDark })
+    
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      console.log('Setting dark theme')
       setIsDark(true)
       document.documentElement.classList.add('dark')
+    } else {
+      console.log('Setting light theme')
+      setIsDark(false)
+      document.documentElement.classList.remove('dark')
     }
   }, [])
 
   const toggleTheme = () => {
     setIsDark((prev) => {
       const newTheme = !prev
+      console.log('Toggling theme to:', newTheme ? 'dark' : 'light')
       localStorage.setItem('theme', newTheme ? 'dark' : 'light')
       document.documentElement.classList.toggle('dark', newTheme)
+      console.log('Document classes after toggle:', document.documentElement.className)
       return newTheme
     })
   }

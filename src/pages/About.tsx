@@ -9,6 +9,7 @@ import {
   Globe,
   Calendar,
   TrendingUp,
+  Shield,
 } from 'lucide-react'
 
 const About: React.FC = () => {
